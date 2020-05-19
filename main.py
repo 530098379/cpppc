@@ -14,6 +14,7 @@ import json
 if __name__ == "__main__":
 	sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 	print("开始", flush = True)
+	print("--------------------------")
 
 	deta_str = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 	# 文件名
@@ -53,6 +54,11 @@ if __name__ == "__main__":
 		pay_r =requests.get(pay_url, headers = headers)
 		if pay_r.status_code != 200:
 			raise Exception(pay_r.status_code)
+
+		print("读取数据")
+		print("项目编号:" + proc_data["proj_no"], flush = True)
+		print("项目名称:" + proc_data["proj_name"], flush = True)
+		print("--------------------------")
 
 		pay_json_data = json.loads(pay_r.text)
 		
@@ -121,7 +127,8 @@ if __name__ == "__main__":
 		base_workbook.save(base_excel_file_name)
 
 		base_count = base_count + 1;
-		time.sleep(3)
+		time.sleep(5)
 
 
 	print("完成",flush = True)
+	print("--------------------------")

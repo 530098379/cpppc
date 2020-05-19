@@ -1,7 +1,6 @@
 # windows安装依赖命令
 pip install requests  
 pip install xlwt  
-pip install xlrd  
 
 # Windows下，命令行显示汉字
 1、打开CMD.exe命令行窗口  
@@ -17,4 +16,3 @@ curl https://bootstrap.pypa.io/get-pip.py | python3
 # MacOS安装依赖命令
 pip3 install requests  
 pip3 install xlwt  
-pip3 install xlrd  
