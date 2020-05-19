@@ -24,7 +24,7 @@ if __name__ == "__main__":
 	sheet = workbook.add_sheet("Sheet Name1")
 
 	# 获取cookie
-	url_cok = "https://www.cpppc.org:8082/inforpublic/homepage.html#/homepage"
+	url_cok = "https://www.cpppc.org:8082/inforpublic/homepage.html#/searchresult"
 	r_cok =requests.get(url_cok)
 	cookie_jar = r_cok.cookies
 
@@ -32,12 +32,12 @@ if __name__ == "__main__":
 		raise Exception(r_cok.status_code)
 
 	# 获取当前工会的所有年报
-	url_union = "https://olms.dol-esa.gov/query/orgReport.do"
-	param_union = {"reportType":"detailResults","detailID":file_num,"detailReport":"unionDetail",
-			"rptView":"undefined","historyCount":"0","screenName":"orgQueryResultsPage",
-			"searchPage":"/getOrgQry.do","pageAction":"-1","startRow":"1",
-			"endRow":"1","rowCount":"1","sortColumn":"","sortAscending":"false",
-			"reportTypeSave":"orgResults"}
+	url_union = "https://www.cpppc.org:8082/api/pub/project/search"
+	param_union = {"created_date_order":"desc","dist_city":"","dist_code":"",
+			"dist_province":"","end":"","industry":"",
+			"level":"","max":"10000000000000000","min":"0",
+			"name":"","pageNumber":"1","size":"5","start":"",
+			"status":["0","1","2"]}
 	r =requests.post(url_union, param_union, cookies=cookie_jar)
 
 	if r.status_code != 200:
