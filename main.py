@@ -73,28 +73,36 @@ if __name__ == "__main__":
 			pay_sheet.write(pay_count,6, pay_data["ratio"])
 			pay_workbook.save(pay_excel_file_name)
 			pay_count = pay_count + 1;
-		
+
+		base_url = "https://www.cpppc.org:8082/api/pub/project/detail/" + proc_data["proj_rid"]
+		base_r =requests.get(base_url, headers = headers)
+		if base_r.status_code != 200:
+			raise Exception(base_r.status_code)
+
+		base_json_data = json.loads(base_r.text)
+		base_data = base_json_data["data"]
+
 		# 基本指标数据
  		# 编号
-		base_sheet.write(base_count,0, proc_data["proj_no"])
+		base_sheet.write(base_count,0, base_data["projNo"])
 
 		# 所在区域
-		base_sheet.write(base_count,1, proc_data["dist_province_name"] \
-			+ " - " + proc_data["dist_city_name"] \
-			+ (" - " + proc_data["dist_code_name"] if proc_data["dist_code_name"] else "") )
+		base_sheet.write(base_count,1, base_data["distProvinceName"] \
+			+ " - " + base_data["distCityName"] \
+			+ (" - " + base_data["distName"] if base_data["distName"] else "") )
 
 		# 所属行业
-		base_sheet.write(base_count,2, proc_data["industry_required_name"] \
-			+ " - " + proc_data["industry_optional_name"])
+		base_sheet.write(base_count,2, base_data["industryRequiredName"] \
+			+ " - " + base_data["industryOptionalName"])
 
 		# 项目总投资
-		base_sheet.write(base_count,3, proc_data["invest_count"]/1000000)
+		base_sheet.write(base_count,3, base_data["investCount"]/1000000)
 
 		# 所处阶段
 		base_sheet.write(base_count,4, "")
 
 		# 发起时间
-		base_sheet.write(base_count,5, "")
+		base_sheet.write(base_count,5, base_data["startTime"])
 
 		# 项目示范级别/批次
 		base_sheet.write(base_count,6, "")
@@ -103,25 +111,25 @@ if __name__ == "__main__":
 		base_sheet.write(base_count,7, "")
 
 		# 项目联系人
-		base_sheet.write(base_count,8, "")
+		base_sheet.write(base_count,8, base_data["linkUname"])
 
 		# 联系电话
-		base_sheet.write(base_count,9, "")
+		base_sheet.write(base_count,9, base_data["linkTel"])
 
 		# 合作期限
-		base_sheet.write(base_count,10, "")
+		base_sheet.write(base_count,10, base_data["cooperationTerm"])
 
 		# 运作方式
-		base_sheet.write(base_count,11, "")
+		base_sheet.write(base_count,11, base_data["cooperationTerm"])
 
 		# 采购方式
 		base_sheet.write(base_count,12, "")
 
 		base_for_count = 13
-		for base_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
-			base_sheet.write(base_count,base_for_count, base_data["indicatorName"])# row, column, value
-			base_sheet.write(base_count,base_for_count + 1, base_data["weight"])
-			base_sheet.write(base_count,base_for_count + 2, base_data["scoreResult"])
+		for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
+			base_sheet.write(base_count,base_for_count, quanzhong_data["indicatorName"])# row, column, value
+			base_sheet.write(base_count,base_for_count + 1, quanzhong_data["weight"])
+			base_sheet.write(base_count,base_for_count + 2, quanzhong_data["scoreResult"])
 			base_for_count = base_for_count + 3
 
 		base_workbook.save(base_excel_file_name)
