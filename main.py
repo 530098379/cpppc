@@ -34,6 +34,7 @@ if __name__ == "__main__":
 		"content-type":"application/json"
 	}
 
+	# 获取项目总数
 	url = "https://www.cpppc.org:8082/api/report/open/mapdemooverall?divisionCode=0"
 	r =requests.get(url, headers = headers)
 	if r.status_code != 200:
@@ -136,6 +137,7 @@ if __name__ == "__main__":
 			# 采购方式
 			base_sheet.write(base_count,12, "")
 
+			# 权重数据
 			base_for_count = 13
 			for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
 				base_sheet.write(base_count,base_for_count, quanzhong_data["indicatorName"])# row, column, value
@@ -147,7 +149,6 @@ if __name__ == "__main__":
 
 			base_count = base_count + 1;
 			time.sleep(3)
-
 
 	print("完成",flush = True)
 	print("--------------------------")
