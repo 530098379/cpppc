@@ -44,7 +44,7 @@ if __name__ == "__main__":
 	print("总页数:" + str(proc_count), flush = True)
 	print("--------------------------")
 
-	for pageNumber in range(0, proc_count):
+	for pageNumber in range(1, proc_count + 1):
 		# 获取每页的项目id
 		proc_url = "https://www.cpppc.org:8082/api/pub/project/search"
 		proc_param = {"created_date_order":"desc","dist_city":"","dist_code":"",
