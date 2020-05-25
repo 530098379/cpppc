@@ -147,7 +147,12 @@ if __name__ == "__main__":
 			base_sheet.write(base_count, 10, base_data["cooperationTerm"])
 
 			# 运作方式
-			base_sheet.write(base_count, 11, base_data["cooperationTerm"])
+			if base_data["startType"] == "1":
+				base_sheet.write(base_count, 11, "")
+			elif base_data["startType"] == "3":
+				base_sheet.write(base_count, 11, "")
+			else:
+				base_sheet.write(base_count, 11, "")
 
 			# 采购方式
 			if base_data["operateMode"] == "1":
@@ -157,10 +162,14 @@ if __name__ == "__main__":
 			else:
 				base_sheet.write(base_count, 12, "")
 
+			# 评价指标的数量
+			base_sheet.write(base_count, 13, base_data["startType"])
+
 			# 权重数据
-			base_for_count = 13
+			base_for_count = 14
 			for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
-				base_sheet.write(base_count, base_for_count, quanzhong_data["indicatorName"])# row, column, value
+				base_sheet.write(base_count, base_for_count, \
+					quanzhong_data["indicatorName"] if quanzhong_data["indicatorName"] else "")
 				base_sheet.write(base_count, base_for_count + 1, quanzhong_data["weight"])
 				base_sheet.write(base_count, base_for_count + 2, quanzhong_data["scoreResult"])
 				base_for_count = base_for_count + 3
