@@ -245,9 +245,14 @@ if __name__ == "__main__":
 
 			for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
 				base_sheet.write(base_count, base_for_count, \
-					quanzhong_data["indicatorName"] if quanzhong_data["indicatorName"] else "")
-				base_sheet.write(base_count, base_for_count + 1, quanzhong_data["weight"])
-				base_sheet.write(base_count, base_for_count + 2, quanzhong_data["scoreResult"])
+					quanzhong_data["indicatorName"] if "indicatorName" in quanzhong_data else "")
+
+				base_sheet.write(base_count, base_for_count + 1, \
+					quanzhong_data["weight"] if "weight" in quanzhong_data else "")
+
+				base_sheet.write(base_count, base_for_count + 2, \
+					quanzhong_data["scoreResult"] if "scoreResult" in quanzhong_data else "")
+
 				base_for_count = base_for_count + 3
 
 			base_workbook.save(base_excel_file_name)
