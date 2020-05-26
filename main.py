@@ -79,10 +79,9 @@ if __name__ == "__main__":
 				pay_sheet.write(pay_count, 0, proc_data["proj_no"]) # row, column, value
 				pay_sheet.write(pay_count, 1, pay_data["year"])
 				pay_sheet.write(pay_count, 2, pay_data["ratioA"]/1000000)
-				pay_sheet.write(pay_count, 3, pay_data["ratioA"]/1000000)
-				pay_sheet.write(pay_count, 4, pay_data["ratioE"]/1000000)
-				pay_sheet.write(pay_count, 5, pay_data["ratioG"]/1000000)
-				pay_sheet.write(pay_count, 6, pay_data["ratio"])
+				pay_sheet.write(pay_count, 3, pay_data["ratioE"]/1000000)
+				pay_sheet.write(pay_count, 4, pay_data["ratioG"]/1000000)
+				pay_sheet.write(pay_count, 5, pay_data["ratio"])
 				pay_workbook.save(pay_excel_file_name)
 				pay_count = pay_count + 1;
 
@@ -112,9 +111,11 @@ if __name__ == "__main__":
 
 			# 所处阶段
 			if base_data["projState"] == "1":
-				base_sheet.write(base_count, 4, "")
+				base_sheet.write(base_count, 4, "准备阶段")
 			elif base_data["projState"] == "2":
-				base_sheet.write(base_count, 4, "")
+				base_sheet.write(base_count, 4, "采购阶段")
+			elif base_data["projState"] == "3":
+				base_sheet.write(base_count, 4, "执行阶段")
 			else:
 				base_sheet.write(base_count, 4, "")
 
@@ -122,18 +123,50 @@ if __name__ == "__main__":
 			base_sheet.write(base_count, 5, base_data["startTime"])
 
 			# 项目示范级别/批次
-			if base_data["projLevel"] == "1":
-				base_sheet.write(base_count, 6, "")
-			elif base_data["projLevel"] == "3":
-				base_sheet.write(base_count, 6, "")
+			if base_data["example"] == "1":
+				batch_level = ""
+				for example_data in base_data["exampleList"]:
+					batch_name = ""
+					batch_number = example_data["batchNumber"]
+					if batch_number == "1":
+						batch_name = "第一批次"
+					elif batch_number == "2":
+						batch_name = "第二批次"
+					elif batch_number == "3":
+						batch_name = "第三批次"
+					elif batch_number == "4":
+						batch_name = "第四批次"
+					elif batch_number == "-1":
+						batch_name = "无批次信息"
+					else:
+						batch_name = ""
+					
+					example_level = example_data["exampleLevel"]
+					example_level_name = ""
+					if example_level == "0":
+						example_level_name = "国家级"
+					elif example_level == "1":
+						example_level_name = "省级"
+					elif example_level == "2":
+						example_level_name = "市级"
+					else:
+						example_level_name = ""
+				batch_level += batch_name
+				batch_level += example_level_name
+
+				base_sheet.write(base_count, 6, batch_level)
+			elif base_data["example"] == "2":
+				base_sheet.write(base_count, 6, "暂无")
 			else:
 				base_sheet.write(base_count, 6, "")
 
 			# 回报机制
 			if base_data["returnMode"] == "1":
-				base_sheet.write(base_count, 7, "")
+				base_sheet.write(base_count, 7, "政府付费")
+			elif base_data["returnMode"] == "2":
+				base_sheet.write(base_count, 7, "使用者付费")
 			elif base_data["returnMode"] == "3":
-				base_sheet.write(base_count, 7, "")
+				base_sheet.write(base_count, 7, "可行性缺口补助")
 			else:
 				base_sheet.write(base_count, 7, "")
 
@@ -147,10 +180,24 @@ if __name__ == "__main__":
 			base_sheet.write(base_count, 10, base_data["cooperationTerm"])
 
 			# 运作方式
-			if base_data["startType"] == "1":
-				base_sheet.write(base_count, 11, "")
-			elif base_data["startType"] == "3":
-				base_sheet.write(base_count, 11, "")
+			if base_data["operateMode"] == "1":
+				base_sheet.write(base_count, 11, "BOT")
+			elif base_data["operateMode"] == "2":
+				base_sheet.write(base_count, 11, "TOT")
+			elif base_data["operateMode"] == "3":
+				base_sheet.write(base_count, 11, "ROT")
+			elif base_data["operateMode"] == "4":
+				base_sheet.write(base_count, 11, "BOO")
+			elif base_data["operateMode"] == "5":
+				base_sheet.write(base_count, 11, "TOT+BOT")
+			elif base_data["operateMode"] == "6":
+				base_sheet.write(base_count, 11, "TOT+BOO")
+			elif base_data["operateMode"] == "7":
+				base_sheet.write(base_count, 11, "OM")
+			elif base_data["operateMode"] == "8":
+				base_sheet.write(base_count, 11, "MC")
+			elif base_data["operateMode"] == "9":
+				base_sheet.write(base_count, 11, "其他")
 			else:
 				base_sheet.write(base_count, 11, "")
 
