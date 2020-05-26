@@ -210,7 +210,7 @@ if __name__ == "__main__":
 				base_sheet.write(base_count, 12, "")
 
 			# 评价指标的数量
-			base_sheet.write(base_count, 13, base_data["startType"])
+			base_sheet.write(base_count, 13, len(pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]))
 
 			# 权重数据
 			base_for_count = 14
