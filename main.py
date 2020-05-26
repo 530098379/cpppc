@@ -50,7 +50,7 @@ if __name__ == "__main__":
 	base_sheet.write(0, 12, "运作方式")
 	base_sheet.write(0, 13, "采购方式")
 	base_sheet.write(0, 14, "指标数量")
-	for i in range(1, 10):
+	for i in range(1, 15):
 		base_sheet.write(0, i * 3 + 12, "指标" + str(i))
 		base_sheet.write(0, i * 3 + 13, "权重" + str(i))
 		base_sheet.write(0, i * 3 + 14, "评分" + str(i))
@@ -135,7 +135,7 @@ if __name__ == "__main__":
 				+ " - " + base_data["industryOptionalName"])
 
 			# 项目总投资
-			base_sheet.write(base_count, 4, base_data["investCount"]/1000000)
+			base_sheet.write(base_count, 4, str(base_data["investCount"]/1000000) + "万元")
 
 			# 所处阶段
 			if base_data["projState"] == "1":
