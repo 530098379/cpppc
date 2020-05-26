@@ -51,9 +51,9 @@ if __name__ == "__main__":
 	base_sheet.write(0, 13, "采购方式")
 	base_sheet.write(0, 14, "指标数量")
 	for i in range(1, 10):
-		base_sheet.write(0, i + 14, "指标" + i)
-		base_sheet.write(0, i + 15, "权重1" + i)
-		base_sheet.write(0, i + 16, "评分1" + i)
+		base_sheet.write(0, i * 3 + 12, "指标" + str(i))
+		base_sheet.write(0, i * 3 + 13, "权重" + str(i))
+		base_sheet.write(0, i * 3 + 14, "评分" + str(i))
 
 	headers = {
 		"content-type":"application/json"
@@ -205,7 +205,7 @@ if __name__ == "__main__":
 			base_sheet.write(base_count, 10, base_data["linkTel"])
 
 			# 合作期限
-			base_sheet.write(base_count, 11, base_data["cooperationTerm"] + "年")
+			base_sheet.write(base_count, 11, str(base_data["cooperationTerm"]) + "年")
 
 			# 运作方式
 			if base_data["operateMode"] == "1":
