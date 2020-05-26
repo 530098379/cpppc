@@ -151,7 +151,7 @@ if __name__ == "__main__":
 			base_sheet.write(base_count, 6, base_data["startTime"])
 
 			# 项目示范级别/批次
-			if base_data["example"] == "1":
+			if base_data["example"] == 1:
 				batch_level = ""
 				for example_data in base_data["exampleList"]:
 					batch_name = ""
@@ -183,7 +183,7 @@ if __name__ == "__main__":
 				batch_level += example_level_name
 
 				base_sheet.write(base_count, 7, batch_level)
-			elif base_data["example"] == "2":
+			elif base_data["example"] == 2:
 				base_sheet.write(base_count, 7, "暂无")
 			else:
 				base_sheet.write(base_count, 7, "")
