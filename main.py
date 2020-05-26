@@ -22,13 +22,38 @@ if __name__ == "__main__":
 	base_excel_file_name = os.getcwd() + "\\基本指标_" + deta_str + ".xls"
 
 	# 做成Excel文件
-	pay_count = 0
+	pay_count = 1
 	pay_workbook = xlwt.Workbook()
 	pay_sheet = pay_workbook.add_sheet("Sheet Name1")
+	pay_sheet.write(0, 0, "编号") # row, column, value
+	pay_sheet.write(0, 1, "支出年度")
+	pay_sheet.write(0, 2, "A-本项目一般公共预算支出数额（万元）")
+	pay_sheet.write(0, 3, "B-本级已有管理库项目一般公共预算支出数额（万元）")
+	pay_sheet.write(0, 4, "C-年度一般公共预算 支出数额（万元）")
+	pay_sheet.write(0, 5, "占比（%）")
 
-	base_count = 0
+	base_count = 1
 	base_workbook = xlwt.Workbook()
 	base_sheet = base_workbook.add_sheet("Sheet Name1")
+	base_sheet.write(0, 0, "项目名称") # row, column, value
+	base_sheet.write(0, 1, "编号")
+	base_sheet.write(0, 2, "所在区域")
+	base_sheet.write(0, 3, "所属行业")
+	base_sheet.write(0, 4, "项目总投资")
+	base_sheet.write(0, 5, "所处阶段")
+	base_sheet.write(0, 6, "发起时间")
+	base_sheet.write(0, 7, "项目示范级别/批次")
+	base_sheet.write(0, 8, "回报机制")
+	base_sheet.write(0, 9, "项目联系人")
+	base_sheet.write(0, 10, "联系电话")
+	base_sheet.write(0, 11, "合作期限")
+	base_sheet.write(0, 12, "运作方式")
+	base_sheet.write(0, 13, "采购方式")
+	base_sheet.write(0, 14, "指标数量")
+	for i in range(1, 10):
+		base_sheet.write(0, i + 14, "指标" + i)
+		base_sheet.write(0, i + 15, "权重1" + i)
+		base_sheet.write(0, i + 16, "评分1" + i)
 
 	headers = {
 		"content-type":"application/json"
@@ -94,33 +119,36 @@ if __name__ == "__main__":
 			base_data = base_json_data["data"]
 
 			# 基本指标数据
+			# 项目名称
+			base_sheet.write(base_count, 0, base_data["projName"])
+
 			# 编号
-			base_sheet.write(base_count, 0, base_data["projNo"])
+			base_sheet.write(base_count, 1, base_data["projNo"])
 
 			# 所在区域
-			base_sheet.write(base_count, 1, base_data["distProvinceName"] \
+			base_sheet.write(base_count, 2, base_data["distProvinceName"] \
 				+ " - " + base_data["distCityName"] \
 				+ (" - " + base_data["distName"] if base_data["distName"] else "") )
 
 			# 所属行业
-			base_sheet.write(base_count, 2, base_data["industryRequiredName"] \
+			base_sheet.write(base_count, 3, base_data["industryRequiredName"] \
 				+ " - " + base_data["industryOptionalName"])
 
 			# 项目总投资
-			base_sheet.write(base_count, 3, base_data["investCount"]/1000000)
+			base_sheet.write(base_count, 4, base_data["investCount"]/1000000)
 
 			# 所处阶段
 			if base_data["projState"] == "1":
-				base_sheet.write(base_count, 4, "准备阶段")
+				base_sheet.write(base_count, 5, "准备阶段")
 			elif base_data["projState"] == "2":
-				base_sheet.write(base_count, 4, "采购阶段")
+				base_sheet.write(base_count, 5, "采购阶段")
 			elif base_data["projState"] == "3":
-				base_sheet.write(base_count, 4, "执行阶段")
+				base_sheet.write(base_count, 5, "执行阶段")
 			else:
-				base_sheet.write(base_count, 4, "")
+				base_sheet.write(base_count, 5, "")
 
 			# 发起时间
-			base_sheet.write(base_count, 5, base_data["startTime"])
+			base_sheet.write(base_count, 6, base_data["startTime"])
 
 			# 项目示范级别/批次
 			if base_data["example"] == "1":
@@ -154,66 +182,67 @@ if __name__ == "__main__":
 				batch_level += batch_name
 				batch_level += example_level_name
 
-				base_sheet.write(base_count, 6, batch_level)
+				base_sheet.write(base_count, 7, batch_level)
 			elif base_data["example"] == "2":
-				base_sheet.write(base_count, 6, "暂无")
-			else:
-				base_sheet.write(base_count, 6, "")
-
-			# 回报机制
-			if base_data["returnMode"] == "1":
-				base_sheet.write(base_count, 7, "政府付费")
-			elif base_data["returnMode"] == "2":
-				base_sheet.write(base_count, 7, "使用者付费")
-			elif base_data["returnMode"] == "3":
-				base_sheet.write(base_count, 7, "可行性缺口补助")
+				base_sheet.write(base_count, 7, "暂无")
 			else:
 				base_sheet.write(base_count, 7, "")
 
+			# 回报机制
+			if base_data["returnMode"] == "1":
+				base_sheet.write(base_count, 8, "政府付费")
+			elif base_data["returnMode"] == "2":
+				base_sheet.write(base_count, 8, "使用者付费")
+			elif base_data["returnMode"] == "3":
+				base_sheet.write(base_count, 8, "可行性缺口补助")
+			else:
+				base_sheet.write(base_count, 8, "")
+
 			# 项目联系人
-			base_sheet.write(base_count, 8, base_data["linkUname"])
+			base_sheet.write(base_count, 9, base_data["linkUname"])
 
 			# 联系电话
-			base_sheet.write(base_count, 9, base_data["linkTel"])
+			base_sheet.write(base_count, 10, base_data["linkTel"])
 
 			# 合作期限
-			base_sheet.write(base_count, 10, base_data["cooperationTerm"])
+			base_sheet.write(base_count, 11, base_data["cooperationTerm"] + "年")
 
 			# 运作方式
 			if base_data["operateMode"] == "1":
-				base_sheet.write(base_count, 11, "BOT")
+				base_sheet.write(base_count, 12, "BOT")
 			elif base_data["operateMode"] == "2":
-				base_sheet.write(base_count, 11, "TOT")
+				base_sheet.write(base_count, 12, "TOT")
 			elif base_data["operateMode"] == "3":
-				base_sheet.write(base_count, 11, "ROT")
+				base_sheet.write(base_count, 12, "ROT")
 			elif base_data["operateMode"] == "4":
-				base_sheet.write(base_count, 11, "BOO")
+				base_sheet.write(base_count, 12, "BOO")
 			elif base_data["operateMode"] == "5":
-				base_sheet.write(base_count, 11, "TOT+BOT")
+				base_sheet.write(base_count, 12, "TOT+BOT")
 			elif base_data["operateMode"] == "6":
-				base_sheet.write(base_count, 11, "TOT+BOO")
+				base_sheet.write(base_count, 12, "TOT+BOO")
 			elif base_data["operateMode"] == "7":
-				base_sheet.write(base_count, 11, "OM")
+				base_sheet.write(base_count, 12, "OM")
 			elif base_data["operateMode"] == "8":
-				base_sheet.write(base_count, 11, "MC")
+				base_sheet.write(base_count, 12, "MC")
 			elif base_data["operateMode"] == "9":
-				base_sheet.write(base_count, 11, "其他")
+				base_sheet.write(base_count, 12, "其他")
 			else:
-				base_sheet.write(base_count, 11, "")
+				base_sheet.write(base_count, 12, "")
 
 			# 采购方式
 			if base_data["operateMode"] == "1":
-				base_sheet.write(base_count, 12, "")
+				base_sheet.write(base_count, 13, "")
 			elif base_data["operateMode"] == "3":
-				base_sheet.write(base_count, 12, "")
+				base_sheet.write(base_count, 13, "")
 			else:
-				base_sheet.write(base_count, 12, "")
+				base_sheet.write(base_count, 13, "")
 
 			# 评价指标的数量
-			base_sheet.write(base_count, 13, len(pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]))
+			base_sheet.write(base_count, 14, len(pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]))
 
 			# 权重数据
-			base_for_count = 14
+			base_for_count = 15
+
 			for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
 				base_sheet.write(base_count, base_for_count, \
 					quanzhong_data["indicatorName"] if quanzhong_data["indicatorName"] else "")
