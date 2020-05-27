@@ -102,11 +102,11 @@ if __name__ == "__main__":
 			# 预算指标数据
 			for pay_data in pay_json_data["data"]["prepareFinancial"]["payDutyRatioList"]:
 				pay_sheet.write(pay_count, 0, proc_data["proj_no"]) # row, column, value
-				pay_sheet.write(pay_count, 1, pay_data["year"])
-				pay_sheet.write(pay_count, 2, pay_data["ratioA"]/1000000)
-				pay_sheet.write(pay_count, 3, pay_data["ratioE"]/1000000)
-				pay_sheet.write(pay_count, 4, pay_data["ratioG"]/1000000)
-				pay_sheet.write(pay_count, 5, pay_data["ratio"])
+				pay_sheet.write(pay_count, 1, pay_data["year"] if "year" in pay_data else "")
+				pay_sheet.write(pay_count, 2, pay_data["ratioA"]/1000000 if "ratioA" in pay_data else "")
+				pay_sheet.write(pay_count, 3, pay_data["ratioE"]/1000000 if "ratioE" in pay_data else "")
+				pay_sheet.write(pay_count, 4, pay_data["ratioG"]/1000000 if "ratioG" in pay_data else "")
+				pay_sheet.write(pay_count, 5, pay_data["ratio"] if "ratio" in pay_data else "")
 				pay_workbook.save(pay_excel_file_name)
 				pay_count = pay_count + 1;
 
