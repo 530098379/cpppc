@@ -238,7 +238,7 @@ if __name__ == "__main__":
 			if purchase_way == "1":
 				base_sheet.write(base_count, 13, "公开招标")
 			elif purchase_way == "2":
-				base_sheet.write(base_count, 13, "")
+				base_sheet.write(base_count, 13, "竞争性谈判")
 			elif purchase_way == "3":
 				base_sheet.write(base_count, 13, "邀请招标")
 			elif purchase_way == "4":
