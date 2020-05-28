@@ -100,7 +100,10 @@ if __name__ == "__main__":
 			print("--------------------------")
 
 			pay_json_data = json.loads(pay_r.text)
-			
+
+			# 采购方式
+			purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"]
+
 			# 预算指标数据
 			for pay_data in pay_json_data["data"]["prepareFinancial"]["payDutyRatioList"]:
 				pay_sheet.write(pay_count, 0, proc_data["proj_no"]) # row, column, value
@@ -232,10 +235,16 @@ if __name__ == "__main__":
 				base_sheet.write(base_count, 12, "")
 
 			# 采购方式
-			if base_data["operateMode"] == "1":
+			if purchase_way == "1":
+				base_sheet.write(base_count, 13, "公开招标")
+			elif purchase_way == "2":
 				base_sheet.write(base_count, 13, "")
-			elif base_data["operateMode"] == "3":
-				base_sheet.write(base_count, 13, "")
+			elif purchase_way == "3":
+				base_sheet.write(base_count, 13, "邀请招标")
+			elif purchase_way == "4":
+				base_sheet.write(base_count, 13, "竞争性磋商")
+			elif purchase_way == "5":
+				base_sheet.write(base_count, 13, "单一来源采购")
 			else:
 				base_sheet.write(base_count, 13, "")
 
@@ -260,7 +269,7 @@ if __name__ == "__main__":
 			base_workbook.save(base_excel_file_name)
 
 			base_count = base_count + 1;
-			time.sleep(1)
+			time.sleep(2)
 
 	print("完成", flush = True)
 	print("--------------------------")
