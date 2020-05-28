@@ -71,6 +71,8 @@ if __name__ == "__main__":
 	print("--------------------------")
 
 	for pageNumber in range(1, proc_count + 1):
+		print("当前页数:" + str(pageNumber) + "/" + str(proc_count), flush = True)
+		print("--------------------------")
 		# 获取每页的项目id
 		proc_url = "https://www.cpppc.org:8082/api/pub/project/search"
 		proc_param = {"created_date_order":"desc","dist_city":"","dist_code":"",
@@ -258,7 +260,7 @@ if __name__ == "__main__":
 			base_workbook.save(base_excel_file_name)
 
 			base_count = base_count + 1;
-			time.sleep(3)
+			time.sleep(1)
 
 	print("完成", flush = True)
 	print("--------------------------")
