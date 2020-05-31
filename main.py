@@ -85,7 +85,7 @@ if __name__ == "__main__":
 			print("当前页数:" + str(pageNumber) + "/" + str(proc_count), flush = True)
 			print("--------------------------")
 
-			# 如果当年工会编码小于最后一次的编码，则跳过去
+			# 如果当前页号小于最后一次的页号，则跳过去
 			if pageNumber < last_page:
 				continue
 
