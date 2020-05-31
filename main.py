@@ -177,7 +177,7 @@ if __name__ == "__main__":
 					batch_level = ""
 					for example_data in base_data["exampleList"]:
 						batch_name = ""
-						batch_number = example_data["batchNumber"]
+						batch_number = example_data["batchNumber"] if "batchNumber" in example_data else ""
 						if batch_number == "1":
 							batch_name = "第一批次"
 						elif batch_number == "2":
