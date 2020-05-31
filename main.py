@@ -137,6 +137,10 @@ if __name__ == "__main__":
 				if base_r.status_code != 200:
 					raise Exception(base_r.status_code)
 
+				# 数据不存在的时候跳过
+				if len(base_r.text) <= 0 :
+					continue
+
 				base_json_data = json.loads(base_r.text)
 				base_data = base_json_data["data"]
 
