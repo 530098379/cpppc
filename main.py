@@ -93,9 +93,9 @@ if __name__ == "__main__":
 			proc_url = "https://www.cpppc.org:8082/api/pub/project/search"
 			proc_param = {"created_date_order":"desc","dist_city":"","dist_code":"",
 					"dist_province":"","end":"","industry":"",
-					"level":"","max":"10000000000000000","min":"0",
-					"name":"","pageNumber":pageNumber,"size":"5","start":"",
-					"status":["0","1","2"]}
+					"level":"","max":10000000000000000,"min":0,
+					"name":"","pageNumber":pageNumber,"size":5,"start":"",
+					"status":["1","2","3"]}
 			proc_r = requests.post(proc_url, headers = headers, data = json.dumps(proc_param))
 
 			if proc_r.status_code != 200:
