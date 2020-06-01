@@ -131,7 +131,7 @@ if __name__ == "__main__":
 					pay_sheet.write(pay_count, 4, pay_data["ratioG"]/1000000 if "ratioG" in pay_data else "")
 					pay_sheet.write(pay_count, 5, pay_data["ratio"] if "ratio" in pay_data else "")
 					pay_workbook.save(pay_excel_file_name)
-					pay_count = pay_count + 1;
+					pay_count = pay_count + 1
 
 				base_url = "https://www.cpppc.org:8082/api/pub/project/detail/" + proc_data["proj_rid"]
 				base_r = requests.get(base_url, headers = headers)
@@ -296,7 +296,7 @@ if __name__ == "__main__":
 
 				base_workbook.save(base_excel_file_name)
 
-				base_count = base_count + 1;
+				base_count = base_count + 1
 				time.sleep(2)
 
 	finally:
