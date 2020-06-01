@@ -267,7 +267,7 @@ if __name__ == "__main__":
 				elif purchase_way == "5":
 					base_sheet.write(base_count, 13, "单一来源采购")
 				else:
-					base_sheet.write(base_count, 13, "")
+					base_sheet.write(base_count, 13, "暂无")
 
 				# 评价指标的数量
 				base_sheet.write(base_count, 14, len(pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]))
@@ -276,6 +276,10 @@ if __name__ == "__main__":
 				base_for_count = 15
 
 				for quanzhong_data in pay_json_data["data"]["prepareValue"]["projectPreValueEvaList"]:
+					# 行数多于255，跳过
+					if base_for_count >= 255:
+						break
+
 					base_sheet.write(base_count, base_for_count, \
 						quanzhong_data["indicatorName"] if "indicatorName" in quanzhong_data else "")
 
