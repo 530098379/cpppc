@@ -180,35 +180,37 @@ if __name__ == "__main__":
 				# 项目示范级别/批次
 				if base_data["example"] == 1:
 					batch_level = ""
-					for example_data in base_data["exampleList"]:
-						batch_name = ""
-						batch_number = example_data["batchNumber"] if "batchNumber" in example_data else ""
-						if batch_number == "1":
-							batch_name = "第一批次"
-						elif batch_number == "2":
-							batch_name = "第二批次"
-						elif batch_number == "3":
-							batch_name = "第三批次"
-						elif batch_number == "4":
-							batch_name = "第四批次"
-						elif batch_number == "-1":
-							batch_name = "无批次信息"
-						else:
+					if "exampleList" in base_data:
+						for example_data in base_data["exampleList"]:
 							batch_name = ""
-						
-						example_level = example_data["exampleLevel"]
-						example_level_name = ""
-						if example_level == "0":
-							example_level_name = "国家级"
-						elif example_level == "1":
-							example_level_name = "省级"
-						elif example_level == "2":
-							example_level_name = "市级"
-						else:
+							batch_number = example_data["batchNumber"] if "batchNumber" in example_data else ""
+							if batch_number == "1":
+								batch_name = "第一批次"
+							elif batch_number == "2":
+								batch_name = "第二批次"
+							elif batch_number == "3":
+								batch_name = "第三批次"
+							elif batch_number == "4":
+								batch_name = "第四批次"
+							elif batch_number == "-1":
+								batch_name = "无批次信息"
+							else:
+								batch_name = ""
+							
+							example_level = example_data["exampleLevel"]
 							example_level_name = ""
-					batch_level += batch_name
-					batch_level += example_level_name
-
+							if example_level == "0":
+								example_level_name = "国家级"
+							elif example_level == "1":
+								example_level_name = "省级"
+							elif example_level == "2":
+								example_level_name = "市级"
+							else:
+								example_level_name = ""
+						batch_level += batch_name
+						batch_level += example_level_name
+					else:
+						batch_level = "暂无"
 					base_sheet.write(base_count, 7, batch_level)
 				elif base_data["example"] == 2:
 					base_sheet.write(base_count, 7, "暂无")
