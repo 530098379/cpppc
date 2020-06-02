@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
 				# 采购方式
 				purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"] if "socialPurchaseWay" \
-					in pay_json_data["data"]["implPlanInfo"] else ""
+					in pay_json_data["data"] else ""
 
 				# 预算指标数据
 				for pay_data in pay_json_data["data"]["prepareFinancial"]["payDutyRatioList"]:
