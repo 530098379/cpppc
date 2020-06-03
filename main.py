@@ -119,8 +119,7 @@ if __name__ == "__main__":
 				pay_json_data = json.loads(pay_r.text)
 
 				# 采购方式
-				purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"] if "socialPurchaseWay" \
-					in pay_json_data["data"] else ""
+				purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"]
 
 				# 预算指标数据
 				for pay_data in pay_json_data["data"]["prepareFinancial"]["payDutyRatioList"]:
@@ -165,11 +164,11 @@ if __name__ == "__main__":
 				base_sheet.write(base_count, 4, str(base_data["investCount"]/1000000) + "万元")
 
 				# 所处阶段
-				if base_data["projState"] == "1":
+				if base_data["projStatus"] == "1":
 					base_sheet.write(base_count, 5, "准备阶段")
-				elif base_data["projState"] == "2":
+				elif base_data["projStatus"] == "2":
 					base_sheet.write(base_count, 5, "采购阶段")
-				elif base_data["projState"] == "3":
+				elif base_data["projStatus"] == "3":
 					base_sheet.write(base_count, 5, "执行阶段")
 				else:
 					base_sheet.write(base_count, 5, "")
