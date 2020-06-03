@@ -206,8 +206,8 @@ if __name__ == "__main__":
 								example_level_name = "市级"
 							else:
 								example_level_name = ""
-						batch_level += batch_name
-						batch_level += example_level_name
+							batch_level += batch_name
+							batch_level += example_level_name
 					else:
 						batch_level = "暂无"
 					base_sheet.write(base_count, 7, batch_level)
