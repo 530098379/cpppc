@@ -183,26 +183,26 @@ if __name__ == "__main__":
 						for example_data in base_data["exampleList"]:
 							batch_name = ""
 							batch_number = example_data["batchNumber"] if "batchNumber" in example_data else ""
-							if batch_number == "1":
+							if batch_number == 1:
 								batch_name = "第一批次"
-							elif batch_number == "2":
+							elif batch_number == 2:
 								batch_name = "第二批次"
-							elif batch_number == "3":
+							elif batch_number == 3:
 								batch_name = "第三批次"
-							elif batch_number == "4":
+							elif batch_number == 4:
 								batch_name = "第四批次"
-							elif batch_number == "-1":
+							elif batch_number == -1:
 								batch_name = "无批次信息"
 							else:
 								batch_name = ""
 							
 							example_level = example_data["exampleLevel"]
 							example_level_name = ""
-							if example_level == "0":
+							if example_level == 0:
 								example_level_name = "国家级"
-							elif example_level == "1":
+							elif example_level == 1:
 								example_level_name = "省级"
-							elif example_level == "2":
+							elif example_level == 2:
 								example_level_name = "市级"
 							else:
 								example_level_name = ""
