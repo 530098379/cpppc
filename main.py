@@ -119,7 +119,9 @@ if __name__ == "__main__":
 				pay_json_data = json.loads(pay_r.text)
 
 				# 采购方式
-				purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"]
+				purchase_way = "暂无"
+				if "socialPurchaseWay" in pay_json_data["data"]["implPlanInfo"]:
+					purchase_way = pay_json_data["data"]["implPlanInfo"]["socialPurchaseWay"]
 
 				# 预算指标数据
 				for pay_data in pay_json_data["data"]["prepareFinancial"]["payDutyRatioList"]:
@@ -299,6 +301,7 @@ if __name__ == "__main__":
 				time.sleep(2)
 
 	finally:
+		print("停止时间:" + deta_str, flush = True)
 		# 中断或者异常，记录最后的工会编码以及年份
 		with open('./the_last_dance.txt', 'w') as obj_f:
 			obj_f.write(str(pageNumber))
