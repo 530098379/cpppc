@@ -301,7 +301,7 @@ if __name__ == "__main__":
 				time.sleep(2)
 
 	finally:
-		print("停止时间:" + deta_str, flush = True)
+		print("停止时间:" + datetime.datetime.now().strftime("%Y%m%d%H%M%S"), flush = True)
 		# 中断或者异常，记录最后的工会编码以及年份
 		with open('./the_last_dance.txt', 'w') as obj_f:
 			obj_f.write(str(pageNumber))
